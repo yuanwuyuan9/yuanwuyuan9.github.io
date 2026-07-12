@@ -13,8 +13,16 @@ import {
 import { Metadata } from 'next';
 import { getRuntimeI18nConfig } from '@/lib/i18n/config';
 
+const LEGACY_PAGE_ALIASES: Record<string, string> = {
+  teaching: 'experience',
+};
+
+function resolvePageSlug(slug: string): string {
+  return LEGACY_PAGE_ALIASES[slug] || slug;
+}
+
 function loadDynamicPageData(slug: string, locale?: string): DynamicPageLocaleData | null {
-  const pageConfig = getPageConfig(slug, locale) as BasePageConfig | null;
+  const pageConfig = getPageConfig(resolvePageSlug(slug), locale) as BasePageConfig | null;
 
   if (!pageConfig) {
     return null;
@@ -52,16 +60,17 @@ function loadDynamicPageData(slug: string, locale?: string): DynamicPageLocaleDa
 
 export function generateStaticParams() {
   const config = getConfig();
-  return config.navigation
+  const navigationSlugs = config.navigation
     .filter((nav) => nav.type === 'page' && nav.target !== 'about')
-    .map((nav) => ({
-      slug: nav.target,
-    }));
+    .map((nav) => nav.target);
+
+  return Array.from(new Set([...navigationSlugs, ...Object.keys(LEGACY_PAGE_ALIASES)]))
+    .map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const pageConfig = getPageConfig(slug) as BasePageConfig | null;
+  const pageConfig = getPageConfig(resolvePageSlug(slug)) as BasePageConfig | null;
 
   if (!pageConfig) {
     return {};

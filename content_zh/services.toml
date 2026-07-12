@@ -1,9 +1,15 @@
 type = "card"
 title = "学术服务"
-description = "专业服务与社区参与。"
+description = "学术审稿与专业服务经历。"
 
 [[items]]
 title = "审稿人"
-subtitle = "某期刊"
-date = "2024"
-content = "参与审阅论文。"
+subtitle = "国际机器学习大会（ICML 2026）"
+date = "2026"
+content = "担任 ICML 2026 审稿人。"
+
+[[items]]
+title = "审稿人"
+subtitle = "自然语言处理实证方法会议（EMNLP 2026）"
+date = "2026"
+content = "担任 EMNLP 2026 审稿人。"

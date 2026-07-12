@@ -41,10 +41,11 @@ export interface LocaleMessages {
     abstract: string;
     bibtex: string;
     code: string;
+    pdf: string;
+    arxiv: string;
   };
   footer: {
     lastUpdated: string;
-    builtWithPrism: string;
   };
 }
 
@@ -91,10 +92,11 @@ const en: LocaleMessages = {
     abstract: 'Abstract',
     bibtex: 'BibTeX',
     code: 'Code',
+    pdf: 'PDF',
+    arxiv: 'arXiv',
   },
   footer: {
     lastUpdated: 'Last updated',
-    builtWithPrism: 'Built with PRISM',
   },
 };
 
@@ -141,10 +143,11 @@ const zh: LocaleMessages = {
     abstract: '摘要',
     bibtex: 'BibTeX',
     code: '代码',
+    pdf: 'PDF',
+    arxiv: 'arXiv',
   },
   footer: {
     lastUpdated: '最近更新',
-    builtWithPrism: '由 PRISM 构建',
   },
 };
 

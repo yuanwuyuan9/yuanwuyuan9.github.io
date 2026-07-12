@@ -9,7 +9,9 @@ import {
     CalendarIcon,
     BookOpenIcon,
     ClipboardDocumentIcon,
-    DocumentTextIcon
+    DocumentTextIcon,
+    ArrowDownTrayIcon,
+    ArrowTopRightOnSquareIcon
 } from '@heroicons/react/24/outline';
 import { Publication } from '@/types/publication';
 import { PublicationPageConfig } from '@/types/page';
@@ -201,14 +203,14 @@ export default function PublicationsList({ config, publications, embedded = fals
                         >
                             <div className="flex flex-col md:flex-row gap-6">
                                 {pub.preview && (
-                                    <div className="w-full md:w-48 flex-shrink-0">
-                                        <div className="aspect-video md:aspect-[4/3] relative rounded-lg overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+                                    <div className="w-full md:w-64 flex-shrink-0">
+                                        <div className="aspect-[12/5] relative rounded-md overflow-hidden border border-neutral-200 bg-white dark:border-neutral-700">
                                             <Image
                                                 src={`/papers/${pub.preview}`}
                                                 alt={pub.title}
                                                 fill
-                                                className="object-cover"
-                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                className="object-contain p-2"
+                                                sizes="(max-width: 768px) 100vw, 256px"
                                             />
                                         </div>
                                     </div>
@@ -241,6 +243,30 @@ export default function PublicationsList({ config, publications, embedded = fals
                                     )}
 
                                     <div className="flex flex-wrap gap-2 mt-auto">
+                                        {pub.pdfUrl && (
+                                            <a
+                                                href={pub.pdfUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white transition-colors"
+                                            >
+                                                <ArrowDownTrayIcon className="h-3 w-3 mr-1.5" />
+                                                {messages.publications.pdf}
+                                            </a>
+                                        )}
+                                        {pub.arxivId && (
+                                            <a
+                                                href={pub.arxivId.startsWith('http')
+                                                    ? pub.arxivId
+                                                    : `https://arxiv.org/abs/${pub.arxivId.replace(/^arXiv:/i, '')}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white transition-colors"
+                                            >
+                                                <ArrowTopRightOnSquareIcon className="h-3 w-3 mr-1.5" />
+                                                {messages.publications.arxiv}
+                                            </a>
+                                        )}
                                         {pub.doi && (
                                             <a
                                                 href={`https://doi.org/${pub.doi}`}

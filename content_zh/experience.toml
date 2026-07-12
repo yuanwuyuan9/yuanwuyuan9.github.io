@@ -1,0 +1,35 @@
+type = "card"
+title = "经历"
+description = "按时间顺序排列的教育与科研经历。"
+
+[[items]]
+title = "大连理工大学"
+subtitle = "计算机科学与技术专业工学学士"
+date = "2026 年 6 月"
+content = "本科期间在 [张亮教授](https://faculty.dlut.edu.cn/zhangliang/zh_CN/index.htm) 的指导下开展科研工作，主要研究知识表示与推理及图数据挖掘。"
+tags = ["本科", "知识表示与推理", "图数据挖掘"]
+
+[[items]]
+title = "上海人工智能实验室"
+subtitle = "科研经历"
+content = "在 [卢嘉轩研究员](https://scholar.google.com/citations?user=Kx912p0AAAAJ&hl=en) 的指导下开展科研工作，主要研究事件相机与事件视觉。"
+tags = ["科研", "事件相机", "事件视觉"]
+
+[[items]]
+title = "南京大学智能科学与技术学院"
+subtitle = "科研实习生"
+content = "在 [徐科教授](https://lukexuke.github.io/) 的指导下开展人机交互研究，并得到 [王星博研究员](https://andy-xingbowang.com/) 的协助指导。"
+tags = ["科研实习", "人机交互"]
+
+[[items]]
+title = "中国人民大学高瓴人工智能学院"
+subtitle = "科研经历"
+content = "在 [马彦彪教授](https://scholar.google.com/citations?user=j05wwXcAAAAJ&hl=en) 的指导下开展科研工作，主要研究图数据挖掘。"
+tags = ["科研", "图数据挖掘"]
+
+[[items]]
+title = "哈尔滨工业大学（深圳）与鹏城实验室"
+subtitle = "准联合培养博士生"
+date = "2026 年 9 月"
+content = "导师为 [李晶教授](https://www.li-jing.com/) 和 [刘方明教授](https://fangmingliu.github.io/)。"
+tags = ["博士研究生", "联合培养"]

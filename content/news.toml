@@ -1,7 +1,23 @@
 [[news]]
-date = "2025-11"
-content = "Our work has been accepted by a prestigious journal 🎉"
+date = "2026-07"
+content = "Our collaborative work on human-computer interaction, to which I contributed as a core team member, was accepted by Visual Informatics."
 
 [[news]]
-date = "2025-09"
-content = "Starting my PhD at the University of Example"
+date = "2026-05"
+content = "Our paper on modality-decoupled online recursive editing, with me as the first author, was accepted by ICML 2026."
+
+[[news]]
+date = "2026-05"
+content = "Our paper on semantic-aware knowledge graph completion, with me as the first author, was accepted by Knowledge-Based Systems."
+
+[[news]]
+date = "2026-04"
+content = "Our paper on temporal knowledge graph forecasting, which I led as the first author, was accepted by ACL 2026."
+
+[[news]]
+date = "2025-12"
+content = "Our paper on heating load prediction, which I co-first-authored, was accepted by the Journal of Building Engineering."
+
+[[news]]
+date = "2025-10"
+content = "Our work on multimodal tactile feedback for exercise protection was presented at UbiComp/ISWC 2025."

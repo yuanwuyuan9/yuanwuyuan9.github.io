@@ -1,27 +1,15 @@
 type = "card"
 title = "Awards"
-description = "Honors and awards I have received."
+description = "Selected honors and awards."
 
 [[items]]
-title = "Example Award"
-subtitle = "Organization"
-date = "2025"
-content = "Description of the award."
-
-[[items]]
-title = "Example Award"
-subtitle = "Organization"
+title = "National Runner-Up"
+subtitle = "RoboCup China Special Competition - AI+ Track"
 date = "2024"
-content = "Description of the award."
+content = "Awarded national runner-up in the AI+ Track."
 
 [[items]]
-title = "Example Award"
-subtitle = "Organization"
-date = "2023"
-content = "Description of the award."
-
-[[items]]
-title = "Example Award"
-subtitle = "Organization"
-date = "2022"
-content = "Description of the award."
+title = "Best Creative Project"
+subtitle = "National College Student Innovation Annual Conference"
+date = "2024"
+content = "Recognized as the Best Creative Project at the national annual conference."

@@ -1,19 +1,12 @@
 [site]
-title = "刘嘉乐"
-description = "某某大学博士生个人主页。"
-last_updated = "2025年11月18日"
+title = "李思源"
+description = "李思源的学术主页，哈尔滨工业大学（深圳）与鹏城实验室联合培养博士生。"
+last_updated = "2026年7月13日"
 
 [author]
-name = "刘嘉乐"
-title = "博士生"
-institution = "某某大学"
-
-[social]
-location = "城市，国家"
-location_details = [
-  "理科楼 123 室，",
-  "大学路，城市，国家"
-]
+name = "李思源"
+title = "准博士生"
+institution = "哈尔滨工业大学（深圳）与鹏城实验室"
 
 [[navigation]]
 title = "关于我"
@@ -28,10 +21,10 @@ target = "publications"
 href = "/publications"
 
 [[navigation]]
-title = "教学"
+title = "经历"
 type = "page"
-target = "teaching"
-href = "/teaching"
+target = "experience"
+href = "/experience"
 
 [[navigation]]
 title = "奖项"

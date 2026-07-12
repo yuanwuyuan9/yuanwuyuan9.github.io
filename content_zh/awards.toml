@@ -1,27 +1,15 @@
 type = "card"
 title = "奖项"
-description = "我获得的荣誉与奖项。"
+description = "代表性荣誉与奖项。"
 
 [[items]]
-title = "示例奖项"
-subtitle = "颁发机构"
-date = "2025"
-content = "奖项说明。"
-
-[[items]]
-title = "示例奖项"
-subtitle = "颁发机构"
+title = "全国亚军"
+subtitle = "机器人世界杯中国专项赛 - AI+ 赛道"
 date = "2024"
-content = "奖项说明。"
+content = "获机器人世界杯中国专项赛 AI+ 赛道全国亚军。"
 
 [[items]]
-title = "示例奖项"
-subtitle = "颁发机构"
-date = "2023"
-content = "奖项说明。"
-
-[[items]]
-title = "示例奖项"
-subtitle = "颁发机构"
-date = "2022"
-content = "奖项说明。"
+title = "最佳创意项目"
+subtitle = "全国大学生创新年会"
+date = "2024"
+content = "获全国大学生创新年会最佳创意项目。"

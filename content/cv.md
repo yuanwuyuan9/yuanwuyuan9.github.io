@@ -1,26 +1,26 @@
 ## Education
 
-**The University of Example**, PhD in Natural Science, *2025 - Present*
-- Research focus: Mathematical Principles of Natural Philosophy
-- Supervisor: Prof. Advisor One and Dr. Advisor Two
+**Dalian University of Technology**, BEng in Computer Science and Technology, *June 2026*
+- Undergraduate advisor: Prof. Liang Zhang
 
-**The University of Example**, BSc in Natural Science, *2021 - 2025*
-- Graduated with First Class Honours
+**Harbin Institute of Technology, Shenzhen & Peng Cheng Laboratory**, Incoming Jointly Trained PhD Student, *Starting September 2026*
+- Advisors: Prof. Jing Li and Prof. Fangming Liu
 
-## Experience
+## Research Experience
 
-**Example Role**
-Company/Institution
-*2023 - 2024*
-- Description of key responsibilities and achievements.
-- Utilized skills to solve problems.
+**Shanghai Artificial Intelligence Laboratory**, Research Experience
+- Guidance from Jiaxuan Lu
 
-## Skills
+**School of Intelligence Science and Technology, Nanjing University**, Research Intern
+- Supervisor: Prof. Ke Xu
+- Additional guidance from Researcher Xingbo Wang
+- Explored research topics in human-computer interaction
 
-- **Programming:** Python, C++, MATLAB, LaTeX
-- **Data Analysis:** Pandas, NumPy, SciPy
-- **Languages:** English (Native), French (Fluent)
+**Gaoling School of Artificial Intelligence, Renmin University of China**, Research Experience
+- Guidance from Prof. Yanbiao Ma
 
-## Awards & Honors
+## Research Interests
 
-- **First Prize in Example Competition** - Committee of Example (*2024*)
+- Multimodal large language models
+- Internal representation learning
+- Reasoning analysis

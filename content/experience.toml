@@ -1,0 +1,35 @@
+type = "card"
+title = "Experience"
+description = "Education and research experience in chronological order."
+
+[[items]]
+title = "Dalian University of Technology"
+subtitle = "BEng in Computer Science and Technology"
+date = "Jun 2026"
+content = "Conducted undergraduate research under the supervision of [Prof. Liang Zhang](https://faculty.dlut.edu.cn/zhangliang/zh_CN/index.htm), focusing on knowledge representation and reasoning, as well as graph data mining."
+tags = ["Bachelor's Degree", "Knowledge Representation and Reasoning", "Graph Data Mining"]
+
+[[items]]
+title = "Shanghai Artificial Intelligence Laboratory"
+subtitle = "Research Experience"
+content = "Conducted research under the guidance of [Researcher Jiaxuan Lu](https://scholar.google.com/citations?user=Kx912p0AAAAJ&hl=en), focusing on event cameras and event-based vision."
+tags = ["Research", "Event Cameras", "Event-Based Vision"]
+
+[[items]]
+title = "School of Intelligence Science and Technology, Nanjing University"
+subtitle = "Research Intern"
+content = "Conducted research in human-computer interaction under the supervision of [Prof. Ke Xu](https://lukexuke.github.io/), with additional guidance from [Researcher Xingbo Wang](https://andy-xingbowang.com/)."
+tags = ["Research Internship", "Human-Computer Interaction"]
+
+[[items]]
+title = "Gaoling School of Artificial Intelligence, Renmin University of China"
+subtitle = "Research Experience"
+content = "Conducted research under the guidance of [Prof. Yanbiao Ma](https://scholar.google.com/citations?user=j05wwXcAAAAJ&hl=en), focusing on graph data mining."
+tags = ["Research", "Graph Data Mining"]
+
+[[items]]
+title = "Harbin Institute of Technology, Shenzhen & Peng Cheng Laboratory"
+subtitle = "Incoming Jointly Trained PhD Student"
+date = "Sep 2026"
+content = "Advised by [Prof. Jing Li](https://www.li-jing.com/) and [Prof. Fangming Liu](https://fangmingliu.github.io/)."
+tags = ["PhD", "Joint Training"]
