@@ -60,7 +60,7 @@ export default function SelectedPublications({ publications, title, enableOnePag
                                 </span>
                             ))}
                         </p>
-                        <p className="text-sm font-medium text-neutral-700 dark:text-neutral-300">
+                        <p className="text-sm font-semibold text-accent">
                             {pub.journal || pub.conference}
                         </p>
                         {pub.description && (
