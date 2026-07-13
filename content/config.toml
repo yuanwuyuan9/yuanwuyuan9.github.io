@@ -1,7 +1,7 @@
 [site]
 title = "Siyuan Li"
 description = "Siyuan Li's academic homepage. Incoming jointly trained PhD student at Harbin Institute of Technology, Shenzhen, and Peng Cheng Laboratory."
-favicon = "/bio.jpg"
+favicon = "/favicon.ico"
 last_updated = "July 13, 2026"
 
 [author]
@@ -11,7 +11,8 @@ institution = "Harbin Institute of Technology, Shenzhen & Peng Cheng Laboratory"
 avatar = "/bio.jpg"
 
 [social]
-# Contact information (leave blank or delete to hide)
+google_scholar = "https://scholar.google.com/citations?user=3y-Rq3sAAAAJ&hl=en"
+github = "https://github.com/yuanwuyuan9"
 
 
 [features]

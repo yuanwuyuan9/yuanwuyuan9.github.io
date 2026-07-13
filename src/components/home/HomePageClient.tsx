@@ -54,20 +54,20 @@ export default function HomePageClient({ dataByLocale, defaultLocale }: HomePage
   }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-background min-h-screen">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <div className="lg:col-span-1">
+    <div className="site-shell min-h-screen py-10 sm:py-14 lg:py-20">
+      <div className="grid grid-cols-1 gap-14 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-20 xl:grid-cols-[17rem_minmax(0,1fr)]">
+        <aside>
           <Profile
             author={data.author}
             social={data.social}
             features={data.features}
             researchInterests={data.researchInterests}
           />
-        </div>
+        </aside>
 
-        <div className="lg:col-span-2 space-y-8">
+        <div className="min-w-0 space-y-14 sm:space-y-16">
           {data.pagesToShow.map((page) => (
-            <section key={page.id} id={page.id} className="scroll-mt-24 space-y-8">
+            <section key={page.id} id={page.id} className="scroll-mt-24 space-y-14 sm:space-y-16">
               {page.type === 'about' && page.sections.map((section: SectionConfig) => {
                 switch (section.type) {
                   case 'markdown':

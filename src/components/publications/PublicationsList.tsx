@@ -1,18 +1,19 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useMemo, useState } from 'react';
 import Image from 'next/image';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
-    MagnifyingGlassIcon,
-    FunnelIcon,
-    CalendarIcon,
-    BookOpenIcon,
-    ClipboardDocumentIcon,
-    DocumentTextIcon,
-    ArrowDownTrayIcon,
-    ArrowTopRightOnSquareIcon
-} from '@heroicons/react/24/outline';
+  BookOpen,
+  CalendarDays,
+  Code2,
+  Copy,
+  Download,
+  ExternalLink,
+  FileText,
+  Search,
+  SlidersHorizontal,
+} from 'lucide-react';
 import { Publication } from '@/types/publication';
 import { PublicationPageConfig } from '@/types/page';
 import { cn } from '@/lib/utils';
@@ -20,351 +21,300 @@ import { useMessages } from '@/lib/i18n/useMessages';
 import FormattedBibTeXText from './FormattedBibTeXText';
 
 interface PublicationsListProps {
-    config: PublicationPageConfig;
-    publications: Publication[];
-    embedded?: boolean;
+  config: PublicationPageConfig;
+  publications: Publication[];
+  embedded?: boolean;
 }
 
 export default function PublicationsList({ config, publications, embedded = false }: PublicationsListProps) {
-    const messages = useMessages();
-    const [searchQuery, setSearchQuery] = useState('');
-    const [selectedYear, setSelectedYear] = useState<number | 'all'>('all');
-    const [selectedType, setSelectedType] = useState<string | 'all'>('all');
-    const [showFilters, setShowFilters] = useState(false);
-    const [expandedBibtexId, setExpandedBibtexId] = useState<string | null>(null);
-    const [expandedAbstractId, setExpandedAbstractId] = useState<string | null>(null);
+  const messages = useMessages();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedYear, setSelectedYear] = useState<number | 'all'>('all');
+  const [selectedType, setSelectedType] = useState<string | 'all'>('all');
+  const [showFilters, setShowFilters] = useState(false);
+  const [expandedBibtexId, setExpandedBibtexId] = useState<string | null>(null);
+  const [expandedAbstractId, setExpandedAbstractId] = useState<string | null>(null);
 
-    // Extract unique years and types for filters
-    const years = useMemo(() => {
-        const uniqueYears = Array.from(new Set(publications.map(p => p.year)));
-        return uniqueYears.sort((a, b) => b - a);
-    }, [publications]);
+  const years = useMemo(
+    () => Array.from(new Set(publications.map((publication) => publication.year))).sort((a, b) => b - a),
+    [publications]
+  );
 
-    const types = useMemo(() => {
-        const uniqueTypes = Array.from(new Set(publications.map(p => p.type)));
-        return uniqueTypes.sort();
-    }, [publications]);
+  const types = useMemo(
+    () => Array.from(new Set(publications.map((publication) => publication.type))).sort(),
+    [publications]
+  );
 
-    // Filter publications
-    const filteredPublications = useMemo(() => {
-        return publications.filter(pub => {
-            const matchesSearch =
-                pub.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                pub.authors.some(author => author.name.toLowerCase().includes(searchQuery.toLowerCase())) ||
-                pub.journal?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                pub.conference?.toLowerCase().includes(searchQuery.toLowerCase());
+  const filteredPublications = useMemo(() => {
+    const query = searchQuery.toLowerCase();
+    return publications.filter((publication) => {
+      const matchesSearch =
+        publication.title.toLowerCase().includes(query) ||
+        publication.authors.some((author) => author.name.toLowerCase().includes(query)) ||
+        publication.journal?.toLowerCase().includes(query) ||
+        publication.conference?.toLowerCase().includes(query);
+      const matchesYear = selectedYear === 'all' || publication.year === selectedYear;
+      const matchesType = selectedType === 'all' || publication.type === selectedType;
+      return matchesSearch && matchesYear && matchesType;
+    });
+  }, [publications, searchQuery, selectedType, selectedYear]);
 
-            const matchesYear = selectedYear === 'all' || pub.year === selectedYear;
-            const matchesType = selectedType === 'all' || pub.type === selectedType;
+  const actionClass =
+    'inline-flex h-8 items-center gap-1.5 rounded-md border border-neutral-200 bg-transparent px-2.5 text-xs font-medium text-neutral-600 transition-colors duration-200 hover:border-neutral-300 hover:bg-surface hover:text-accent dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-neutral-700 dark:hover:bg-neutral-900';
+  const filterClass =
+    'rounded-md border px-2.5 py-1.5 text-xs font-medium transition-colors duration-200';
 
-            return matchesSearch && matchesYear && matchesType;
-        });
-    }, [publications, searchQuery, selectedYear, selectedType]);
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
+    >
+      <header className={embedded ? 'mb-7' : 'mb-10 sm:mb-12'}>
+        <h1 className={`editorial-heading ${embedded ? 'text-3xl' : 'text-4xl sm:text-[42px]'}`}>{config.title}</h1>
+        {config.description && (
+          <p className={`mt-4 max-w-2xl text-neutral-600 dark:text-neutral-400 ${embedded ? 'text-sm leading-7' : 'text-base leading-8'}`}>
+            {config.description}
+          </p>
+        )}
+      </header>
 
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-        >
-            <div className="mb-8">
-                <h1 className={`${embedded ? "text-2xl" : "text-4xl"} font-serif font-bold text-primary mb-4`}>{config.title}</h1>
-                {config.description && (
-                    <p className={`${embedded ? "text-base" : "text-lg"} text-neutral-600 dark:text-neutral-500 max-w-2xl`}>
-                        {config.description}
-                    </p>
-                )}
-            </div>
+      <div className="mb-8 space-y-3">
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <div className="relative flex-grow">
+            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-400" />
+            <input
+              type="search"
+              placeholder={messages.publications.searchPlaceholder}
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              className="h-10 w-full rounded-md border border-neutral-200 bg-surface pl-10 pr-4 text-sm text-primary transition-colors duration-200 placeholder:text-neutral-400 focus:border-accent dark:border-neutral-800"
+            />
+          </div>
+          <button
+            type="button"
+            onClick={() => setShowFilters((value) => !value)}
+            className={cn(
+              'inline-flex h-10 items-center justify-center gap-2 rounded-md border px-4 text-sm font-medium transition-colors duration-200',
+              showFilters
+                ? 'border-accent bg-accent text-white'
+                : 'border-neutral-200 bg-surface text-neutral-600 hover:border-neutral-300 hover:text-primary dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-neutral-700'
+            )}
+          >
+            <SlidersHorizontal className="h-4 w-4" />
+            {messages.publications.filters}
+          </button>
+        </div>
 
-            {/* Search and Filter Controls */}
-            <div className="mb-8 space-y-4">
-                {/* ... (keep existing controls) ... */}
-                <div className="flex flex-col sm:flex-row gap-4">
-                    <div className="relative flex-grow">
-                        <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />
-                        <input
-                            type="text"
-                            placeholder={messages.publications.searchPlaceholder}
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 focus:ring-2 focus:ring-accent focus:border-transparent transition-all duration-200"
-                        />
-                    </div>
+        <AnimatePresence initial={false}>
+          {showFilters && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="overflow-hidden"
+            >
+              <div className="grid gap-5 rounded-md border border-neutral-200 bg-surface-muted p-4 sm:grid-cols-2 dark:border-neutral-800">
+                <div>
+                  <div className="mb-2.5 flex items-center gap-1.5 text-xs font-semibold text-neutral-600 dark:text-neutral-300">
+                    <CalendarDays className="h-3.5 w-3.5" />
+                    {messages.publications.year}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
                     <button
-                        onClick={() => setShowFilters(!showFilters)}
-                        className={cn(
-                            "flex items-center justify-center px-4 py-2 rounded-lg border transition-all duration-200",
-                            showFilters
-                                ? "bg-accent text-white border-accent"
-                                : "bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 text-neutral-600 hover:border-accent hover:text-accent"
-                        )}
+                      type="button"
+                      onClick={() => setSelectedYear('all')}
+                      className={cn(filterClass, selectedYear === 'all' ? 'border-accent bg-accent text-white' : 'border-neutral-200 bg-surface text-neutral-600 hover:text-primary dark:border-neutral-700 dark:text-neutral-300')}
                     >
-                        <FunnelIcon className="h-5 w-5 mr-2" />
-                        {messages.publications.filters}
+                      {messages.common.all}
                     </button>
+                    {years.map((year) => (
+                      <button
+                        type="button"
+                        key={year}
+                        onClick={() => setSelectedYear(year)}
+                        className={cn(filterClass, selectedYear === year ? 'border-accent bg-accent text-white' : 'border-neutral-200 bg-surface text-neutral-600 hover:text-primary dark:border-neutral-700 dark:text-neutral-300')}
+                      >
+                        {year}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
-                <AnimatePresence>
-                    {showFilters && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="overflow-hidden"
-                        >
-                            <div className="p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg border border-neutral-200 dark:border-neutral-800 flex flex-wrap gap-6">
-                                {/* Year Filter */}
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300 flex items-center">
-                                        <CalendarIcon className="h-4 w-4 mr-1" /> {messages.publications.year}
-                                    </label>
-                                    <div className="flex flex-wrap gap-2">
-                                        <button
-                                            onClick={() => setSelectedYear('all')}
-                                            className={cn(
-                                                "px-3 py-1 text-xs rounded-full transition-colors",
-                                                selectedYear === 'all'
-                                                    ? "bg-accent text-white"
-                                                    : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700"
-                                            )}
-                                        >
-                                            {messages.common.all}
-                                        </button>
-                                        {years.map(year => (
-                                            <button
-                                                key={year}
-                                                onClick={() => setSelectedYear(year)}
-                                                className={cn(
-                                                    "px-3 py-1 text-xs rounded-full transition-colors",
-                                                    selectedYear === year
-                                                        ? "bg-accent text-white"
-                                                        : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700"
-                                                )}
-                                            >
-                                                {year}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
+                <div>
+                  <div className="mb-2.5 flex items-center gap-1.5 text-xs font-semibold text-neutral-600 dark:text-neutral-300">
+                    <BookOpen className="h-3.5 w-3.5" />
+                    {messages.publications.type}
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedType('all')}
+                      className={cn(filterClass, selectedType === 'all' ? 'border-accent bg-accent text-white' : 'border-neutral-200 bg-surface text-neutral-600 hover:text-primary dark:border-neutral-700 dark:text-neutral-300')}
+                    >
+                      {messages.common.all}
+                    </button>
+                    {types.map((type) => (
+                      <button
+                        type="button"
+                        key={type}
+                        onClick={() => setSelectedType(type)}
+                        className={cn(filterClass, 'capitalize', selectedType === type ? 'border-accent bg-accent text-white' : 'border-neutral-200 bg-surface text-neutral-600 hover:text-primary dark:border-neutral-700 dark:text-neutral-300')}
+                      >
+                        {type.replace('-', ' ')}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
-                                {/* Type Filter */}
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-neutral-700 dark:text-neutral-300 flex items-center">
-                                        <BookOpenIcon className="h-4 w-4 mr-1" /> {messages.publications.type}
-                                    </label>
-                                    <div className="flex flex-wrap gap-2">
-                                        <button
-                                            onClick={() => setSelectedType('all')}
-                                            className={cn(
-                                                "px-3 py-1 text-xs rounded-full transition-colors",
-                                                selectedType === 'all'
-                                                    ? "bg-accent text-white"
-                                                    : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700"
-                                            )}
-                                        >
-                                            {messages.common.all}
-                                        </button>
-                                        {types.map(type => (
-                                            <button
-                                                key={type}
-                                                onClick={() => setSelectedType(type)}
-                                                className={cn(
-                                                    "px-3 py-1 text-xs rounded-full capitalize transition-colors",
-                                                    selectedType === type
-                                                        ? "bg-accent text-white"
-                                                        : "bg-white dark:bg-neutral-800 text-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700"
-                                                )}
-                                            >
-                                                {type.replace('-', ' ')}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-
-            {/* Publications Grid */}
-            <div className="space-y-6">
-                {filteredPublications.length === 0 ? (
-                    <div className="text-center py-12 text-neutral-500">
-                        {messages.publications.noResults}
-                    </div>
-                ) : (
-                    filteredPublications.map((pub, index) => (
-                        <motion.div
-                            key={pub.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4, delay: 0.1 * index }}
-                            className="bg-white dark:bg-neutral-900 p-6 rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-800 hover:shadow-md transition-all duration-200"
-                        >
-                            <div className="flex flex-col md:flex-row gap-6">
-                                {pub.preview && (
-                                    <div className="w-full md:w-64 flex-shrink-0">
-                                        <div className="aspect-[12/5] relative rounded-md overflow-hidden border border-neutral-200 bg-white dark:border-neutral-700">
-                                            <Image
-                                                src={`/papers/${pub.preview}`}
-                                                alt={pub.title}
-                                                fill
-                                                className="object-contain p-2"
-                                                sizes="(max-width: 768px) 100vw, 256px"
-                                            />
-                                        </div>
-                                    </div>
-                                )}
-                                <div className="flex-grow">
-                                    <h3 className={`${embedded ? "text-lg" : "text-xl"} font-semibold text-primary mb-2 leading-tight`}>
-                                        <FormattedBibTeXText nodes={pub.titleNodes} fallback={pub.title} />
-                                    </h3>
-                                    <p className={`${embedded ? "text-sm" : "text-base"} text-neutral-600 dark:text-neutral-400 mb-2`}>
-                                        {pub.authors.map((author, idx) => (
-                                            <span key={idx}>
-                                                <span className={`${author.isHighlighted ? 'font-semibold text-accent' : ''} ${author.isCoAuthor ? `underline underline-offset-4 ${author.isHighlighted ? 'decoration-accent' : 'decoration-neutral-400'}` : ''}`}>
-                                                    {author.name}
-                                                </span>
-                                                {author.isCorresponding && (
-                                                    <sup className={`ml-0 ${author.isHighlighted ? 'text-accent' : 'text-neutral-600 dark:text-neutral-400'}`}>†</sup>
-                                                )}
-                                                {idx < pub.authors.length - 1 && ', '}
-                                            </span>
-                                        ))}
-                                    </p>
-                                    <p className="text-sm font-medium text-neutral-800 dark:text-neutral-600 mb-3">
-                                        {pub.journal || pub.conference} {pub.year}
-                                    </p>
-
-                                    {pub.description && (
-                                        <p className="text-sm text-neutral-600 dark:text-neutral-500 mb-4 line-clamp-3">
-                                            {pub.description}
-                                        </p>
-                                    )}
-
-                                    <div className="flex flex-wrap gap-2 mt-auto">
-                                        {pub.pdfUrl && (
-                                            <a
-                                                href={pub.pdfUrl}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white transition-colors"
-                                            >
-                                                <ArrowDownTrayIcon className="h-3 w-3 mr-1.5" />
-                                                {messages.publications.pdf}
-                                            </a>
-                                        )}
-                                        {pub.arxivId && (
-                                            <a
-                                                href={pub.arxivId.startsWith('http')
-                                                    ? pub.arxivId
-                                                    : `https://arxiv.org/abs/${pub.arxivId.replace(/^arXiv:/i, '')}`}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white transition-colors"
-                                            >
-                                                <ArrowTopRightOnSquareIcon className="h-3 w-3 mr-1.5" />
-                                                {messages.publications.arxiv}
-                                            </a>
-                                        )}
-                                        {pub.doi && (
-                                            <a
-                                                href={`https://doi.org/${pub.doi}`}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white transition-colors"
-                                            >
-                                                DOI
-                                            </a>
-                                        )}
-                                        {pub.code && (
-                                            <a
-                                                href={pub.code}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white transition-colors"
-                                            >
-                                                {messages.publications.code}
-                                            </a>
-                                        )}
-                                        {pub.abstract && (
-                                            <button
-                                                onClick={() => setExpandedAbstractId(expandedAbstractId === pub.id ? null : pub.id)}
-                                                className={cn(
-                                                    "inline-flex items-center px-3 py-1 rounded-md text-xs font-medium transition-colors",
-                                                    expandedAbstractId === pub.id
-                                                        ? "bg-accent text-white"
-                                                        : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white"
-                                                )}
-                                            >
-                                                <DocumentTextIcon className="h-3 w-3 mr-1.5" />
-                                                {messages.publications.abstract}
-                                            </button>
-                                        )}
-                                        {pub.bibtex && (
-                                            <button
-                                                onClick={() => setExpandedBibtexId(expandedBibtexId === pub.id ? null : pub.id)}
-                                                className={cn(
-                                                    "inline-flex items-center px-3 py-1 rounded-md text-xs font-medium transition-colors",
-                                                    expandedBibtexId === pub.id
-                                                        ? "bg-accent text-white"
-                                                        : "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-accent hover:text-white"
-                                                )}
-                                            >
-                                                <BookOpenIcon className="h-3 w-3 mr-1.5" />
-                                                {messages.publications.bibtex}
-                                            </button>
-                                        )}
-                                    </div>
-
-                                    <AnimatePresence>
-                                        {expandedAbstractId === pub.id && pub.abstract ? (
-                                            <motion.div
-                                                key="abstract"
-                                                initial={{ opacity: 0, height: 0 }}
-                                                animate={{ opacity: 1, height: 'auto' }}
-                                                exit={{ opacity: 0, height: 0 }}
-                                                className="overflow-hidden mt-4"
-                                            >
-                                                <div className="bg-neutral-50 dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700">
-                                                    <p className="text-sm text-neutral-600 dark:text-neutral-500 leading-relaxed">
-                                                        {pub.abstract}
-                                                    </p>
-                                                </div>
-                                            </motion.div>
-                                        ) : null}
-                                        {expandedBibtexId === pub.id && pub.bibtex ? (
-                                            <motion.div
-                                                key="bibtex"
-                                                initial={{ opacity: 0, height: 0 }}
-                                                animate={{ opacity: 1, height: 'auto' }}
-                                                exit={{ opacity: 0, height: 0 }}
-                                                className="overflow-hidden mt-4"
-                                            >
-                                                <div className="relative bg-neutral-50 dark:bg-neutral-800 rounded-lg p-4 border border-neutral-200 dark:border-neutral-700">
-                                                    <pre className="text-xs text-neutral-600 dark:text-neutral-500 overflow-x-auto whitespace-pre-wrap font-mono">
-                                                        {pub.bibtex}
-                                                    </pre>
-                                                    <button
-                                                        onClick={() => {
-                                                            navigator.clipboard.writeText(pub.bibtex || '');
-                                                            // Optional: Show copied feedback
-                                                        }}
-                                                        className="absolute top-2 right-2 p-1.5 rounded-md bg-white dark:bg-neutral-700 text-neutral-500 hover:text-accent shadow-sm border border-neutral-200 dark:border-neutral-600 transition-colors"
-                                                        title={messages.common.copyToClipboard}
-                                                    >
-                                                        <ClipboardDocumentIcon className="h-4 w-4" />
-                                                    </button>
-                                                </div>
-                                            </motion.div>
-                                        ) : null}
-                                    </AnimatePresence>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))
+      <div className="border-t border-neutral-200 dark:border-neutral-800">
+        {filteredPublications.length === 0 ? (
+          <div className="border-b border-neutral-200 py-14 text-center text-sm text-neutral-500 dark:border-neutral-800 dark:text-neutral-400">
+            {messages.publications.noResults}
+          </div>
+        ) : (
+          filteredPublications.map((publication, index) => (
+            <motion.article
+              key={publication.id}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25, delay: index * 0.035 }}
+              className="border-b border-neutral-200 py-7 sm:py-8 dark:border-neutral-800"
+            >
+              <div className={cn('grid gap-5', publication.preview && 'md:grid-cols-[13.5rem_minmax(0,1fr)] md:gap-7')}>
+                {publication.preview && (
+                  <div className="relative aspect-video overflow-hidden rounded-md border border-neutral-200 bg-white dark:border-neutral-800">
+                    <Image
+                      src={`/papers/${publication.preview}`}
+                      alt={publication.title}
+                      fill
+                      className="object-contain p-3"
+                      sizes="(max-width: 768px) 100vw, 216px"
+                    />
+                  </div>
                 )}
-            </div>
-        </motion.div>
-    );
+
+                <div className="min-w-0">
+                  <h2 className={`${embedded ? 'text-lg' : 'text-xl sm:text-[22px]'} font-serif font-semibold leading-snug text-primary`}>
+                    <FormattedBibTeXText nodes={publication.titleNodes} fallback={publication.title} />
+                  </h2>
+                  <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+                    {publication.authors.map((author, authorIndex) => (
+                      <span key={`${publication.id}-${author.name}-${authorIndex}`}>
+                        <span className={cn(author.isHighlighted && 'font-semibold text-accent', author.isCoAuthor && `underline underline-offset-4 ${author.isHighlighted ? 'decoration-accent' : 'decoration-neutral-400'}`)}>
+                          {author.name}
+                        </span>
+                        {author.isCorresponding && <sup className={author.isHighlighted ? 'text-accent' : ''}>†</sup>}
+                        {authorIndex < publication.authors.length - 1 && ', '}
+                      </span>
+                    ))}
+                  </p>
+                  <p className="mt-2 text-sm font-semibold text-accent">
+                    {publication.journal || publication.conference} <span className="font-normal text-neutral-500 dark:text-neutral-400">{publication.year}</span>
+                  </p>
+
+                  {publication.description && (
+                    <p className="mt-3 line-clamp-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">{publication.description}</p>
+                  )}
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {publication.pdfUrl && (
+                      <a href={publication.pdfUrl} target="_blank" rel="noopener noreferrer" className={actionClass}>
+                        <Download className="h-3.5 w-3.5" /> {messages.publications.pdf}
+                      </a>
+                    )}
+                    {publication.arxivId && (
+                      <a
+                        href={publication.arxivId.startsWith('http') ? publication.arxivId : `https://arxiv.org/abs/${publication.arxivId.replace(/^arXiv:/i, '')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={actionClass}
+                      >
+                        <ExternalLink className="h-3.5 w-3.5" /> {messages.publications.arxiv}
+                      </a>
+                    )}
+                    {publication.doi && (
+                      <a href={`https://doi.org/${publication.doi}`} target="_blank" rel="noopener noreferrer" className={actionClass}>
+                        <ExternalLink className="h-3.5 w-3.5" /> DOI
+                      </a>
+                    )}
+                    {publication.code && (
+                      <a href={publication.code} target="_blank" rel="noopener noreferrer" className={actionClass}>
+                        <Code2 className="h-3.5 w-3.5" /> {messages.publications.code}
+                      </a>
+                    )}
+                    {publication.abstract && (
+                      <button
+                        type="button"
+                        onClick={() => setExpandedAbstractId(expandedAbstractId === publication.id ? null : publication.id)}
+                        className={cn(actionClass, expandedAbstractId === publication.id && 'border-accent bg-accent text-white hover:bg-accent hover:text-white')}
+                      >
+                        <FileText className="h-3.5 w-3.5" /> {messages.publications.abstract}
+                      </button>
+                    )}
+                    {publication.bibtex && (
+                      <button
+                        type="button"
+                        onClick={() => setExpandedBibtexId(expandedBibtexId === publication.id ? null : publication.id)}
+                        className={cn(actionClass, expandedBibtexId === publication.id && 'border-accent bg-accent text-white hover:bg-accent hover:text-white')}
+                      >
+                        <BookOpen className="h-3.5 w-3.5" /> {messages.publications.bibtex}
+                      </button>
+                    )}
+                  </div>
+
+                  <AnimatePresence initial={false}>
+                    {expandedAbstractId === publication.id && publication.abstract && (
+                      <motion.div
+                        key="abstract"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="mt-4 overflow-hidden"
+                      >
+                        <div className="border-l-2 border-accent/60 bg-surface-muted px-4 py-3 text-sm leading-7 text-neutral-600 dark:text-neutral-300">
+                          {publication.abstract}
+                        </div>
+                      </motion.div>
+                    )}
+                    {expandedBibtexId === publication.id && publication.bibtex && (
+                      <motion.div
+                        key="bibtex"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="mt-4 overflow-hidden"
+                      >
+                        <div className="relative rounded-md border border-neutral-200 bg-surface-muted p-4 dark:border-neutral-800">
+                          <pre className="overflow-x-auto whitespace-pre-wrap pr-8 font-mono text-xs leading-6 text-neutral-600 dark:text-neutral-300">
+                            {publication.bibtex}
+                          </pre>
+                          <button
+                            type="button"
+                            onClick={() => navigator.clipboard.writeText(publication.bibtex || '')}
+                            className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-md border border-neutral-200 bg-surface text-neutral-500 transition-colors duration-200 hover:text-accent dark:border-neutral-700 dark:text-neutral-400"
+                            title={messages.common.copyToClipboard}
+                          >
+                            <Copy className="h-3.5 w-3.5" />
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </div>
+            </motion.article>
+          ))
+        )}
+      </div>
+    </motion.div>
+  );
 }

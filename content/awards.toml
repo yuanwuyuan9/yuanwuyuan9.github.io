@@ -3,10 +3,34 @@ title = "Awards"
 description = "Selected honors and awards."
 
 [[items]]
+title = "National Second Prize"
+subtitle = "China Robotics and Artificial Intelligence Competition"
+date = "2026"
+content = "Served as the faculty advisor to a team that received the National Second Prize."
+
+[[items]]
+title = "National Second Prize"
+subtitle = "China Robotics and Artificial Intelligence Competition"
+date = "2025"
+content = "Served as the faculty advisor to a team that received the National Second Prize."
+
+[[items]]
+title = "Regional Second Prize"
+subtitle = "National College Student Software Innovation Competition"
+date = "2025"
+content = "Received the Second Prize in the regional competition."
+
+[[items]]
 title = "National Runner-Up"
 subtitle = "RoboCup China Special Competition - AI+ Track"
 date = "2024"
 content = "Awarded national runner-up in the AI+ Track."
+
+[[items]]
+title = "Top 5%"
+subtitle = "ZTE Knowledge Engineering Challenge"
+date = "2024"
+content = "Ranked in the top 5% of the ZTE Knowledge Engineering Challenge."
 
 [[items]]
 title = "Best Creative Project"

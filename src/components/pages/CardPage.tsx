@@ -1,91 +1,70 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import ReactMarkdown from 'react-markdown';
 import { CardPageConfig } from '@/types/page';
-
-const markdownComponents = {
-    p: ({ children }: React.ComponentProps<'p'>) => <p className="mb-3 last:mb-0">{children}</p>,
-    ul: ({ children }: React.ComponentProps<'ul'>) => <ul className="list-disc list-inside mb-3 space-y-1">{children}</ul>,
-    ol: ({ children }: React.ComponentProps<'ol'>) => <ol className="list-decimal list-inside mb-3 space-y-1">{children}</ol>,
-    li: ({ children }: React.ComponentProps<'li'>) => <li className="mb-1">{children}</li>,
-    a: ({ ...props }) => (
-        <a
-            {...props}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-accent font-medium transition-all duration-200 rounded hover:bg-accent/10 hover:shadow-sm"
-        />
-    ),
-    blockquote: ({ children }: React.ComponentProps<'blockquote'>) => (
-        <blockquote className="border-l-4 border-accent/50 pl-4 italic my-4 text-neutral-600 dark:text-neutral-500">
-            {children}
-        </blockquote>
-    ),
-    strong: ({ children }: React.ComponentProps<'strong'>) => <strong className="font-semibold text-primary">{children}</strong>,
-    em: ({ children }: React.ComponentProps<'em'>) => <em className="italic">{children}</em>,
-    code: ({ children }: React.ComponentProps<'code'>) => (
-        <code className="px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-[0.95em]">{children}</code>
-    ),
-};
+import MarkdownContent from '@/components/ui/MarkdownContent';
 
 export default function CardPage({ config, embedded = false }: { config: CardPageConfig; embedded?: boolean }) {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-        >
-            <div className={embedded ? "mb-4" : "mb-8"}>
-                <h1 className={`${embedded ? "text-2xl" : "text-4xl"} font-serif font-bold text-primary mb-4`}>{config.title}</h1>
-                {config.description && (
-                    <div className={`${embedded ? "text-base" : "text-lg"} text-neutral-600 dark:text-neutral-500 max-w-2xl leading-relaxed`}>
-                        <ReactMarkdown components={markdownComponents}>
-                            {config.description}
-                        </ReactMarkdown>
-                    </div>
-                )}
-            </div>
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
+    >
+      <header className={embedded ? 'mb-7' : 'mb-10 sm:mb-12'}>
+        <h1 className={`editorial-heading ${embedded ? 'text-3xl' : 'text-4xl sm:text-[42px]'}`}>{config.title}</h1>
+        {config.description && (
+          <MarkdownContent
+            content={config.description}
+            compact={embedded}
+            className={`mt-4 max-w-2xl ${embedded ? '' : 'text-neutral-600 dark:text-neutral-400'}`}
+          />
+        )}
+      </header>
 
-            <div className={`grid ${embedded ? "gap-4" : "gap-6"}`}>
-                {config.items.map((item, index) => (
-                    <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: 0.1 * index }}
-                        className={`bg-white dark:bg-neutral-900 ${embedded ? "p-4" : "p-6"} rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-800 hover:shadow-lg transition-all duration-200 hover:scale-[1.01]`}
-                    >
-                        <div className="flex justify-between items-start mb-2">
-                            <h3 className={`${embedded ? "text-lg" : "text-xl"} font-semibold text-primary`}>{item.title}</h3>
-                            {item.date && (
-                                <span className="text-sm text-neutral-500 font-medium bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded">
-                                    {item.date}
-                                </span>
-                            )}
-                        </div>
-                        {item.subtitle && (
-                            <p className={`${embedded ? "text-sm" : "text-base"} text-accent font-medium mb-3`}>{item.subtitle}</p>
-                        )}
-                        {item.content && (
-                            <div className={`${embedded ? "text-sm" : "text-base"} text-neutral-600 dark:text-neutral-500 leading-relaxed`}>
-                                <ReactMarkdown components={markdownComponents}>
-                                    {item.content}
-                                </ReactMarkdown>
-                            </div>
-                        )}
-                        {item.tags && (
-                            <div className="flex flex-wrap gap-2 mt-4">
-                                {item.tags.map(tag => (
-                                    <span key={tag} className="text-xs text-neutral-500 bg-neutral-50 dark:bg-neutral-800/50 px-2 py-1 rounded border border-neutral-100 dark:border-neutral-800">
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                        )}
-                    </motion.div>
-                ))}
+      <div className="overflow-hidden border-t border-neutral-200 dark:border-neutral-800">
+        {config.items.map((item, index) => (
+          <motion.article
+            key={`${item.date || 'item'}-${item.title}-${index}`}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25, delay: index * 0.035 }}
+            className={`grid border-b border-neutral-200 dark:border-neutral-800 ${embedded ? 'gap-2 py-5 sm:grid-cols-[8.5rem_1.25rem_minmax(0,1fr)] sm:gap-4' : 'gap-2 py-7 sm:grid-cols-[11.5rem_1.5rem_minmax(0,1fr)] sm:gap-5 sm:py-8'}`}
+          >
+            <div className="sm:pt-0.5 sm:text-right">
+              {item.date && (
+                <time className="whitespace-nowrap font-mono text-xs leading-5 tabular-nums text-accent sm:text-neutral-500 sm:dark:text-neutral-400">
+                  {item.date}
+                </time>
+              )}
             </div>
-        </motion.div>
-    );
+            <div className="relative hidden justify-center sm:flex" aria-hidden="true">
+              <span className="absolute -bottom-8 -top-8 left-1/2 w-px -translate-x-1/2 bg-neutral-200 dark:bg-neutral-800" />
+              <span className="relative mt-1.5 h-2.5 w-2.5 rounded-full border-2 border-background bg-accent ring-1 ring-accent/25" />
+            </div>
+            <div className="min-w-0">
+              <h2 className={`${embedded ? 'text-lg' : 'text-xl sm:text-[22px]'} font-serif font-semibold leading-snug text-primary`}>
+                {item.title}
+              </h2>
+              {item.subtitle && (
+                <p className="mt-1.5 text-sm font-semibold leading-6 text-accent">{item.subtitle}</p>
+              )}
+              {item.content && (
+                <MarkdownContent content={item.content} compact className="mt-3" />
+              )}
+              {item.tags && item.tags.length > 0 && (
+                <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-neutral-500 dark:text-neutral-400">
+                  {item.tags.map((tag) => (
+                    <span key={tag} className="before:mr-1.5 before:text-neutral-300 before:content-['/'] dark:before:text-neutral-700 first:before:hidden">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </motion.article>
+        ))}
+      </div>
+    </motion.div>
+  );
 }

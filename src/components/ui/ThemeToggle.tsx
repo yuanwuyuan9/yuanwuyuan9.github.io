@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import { SunIcon, MoonIcon, ComputerDesktopIcon } from '@heroicons/react/24/outline';
+import { Monitor, Moon, Sun } from 'lucide-react';
 import { useThemeStore, type Theme } from '@/lib/stores/themeStore';
 import { useMessages } from '@/lib/i18n/useMessages';
 import { cn } from '@/lib/utils';
@@ -21,17 +21,17 @@ function useThemeOptions(): ThemeOption[] {
     {
       value: 'system',
       label: messages.theme.system,
-      icon: <ComputerDesktopIcon className="h-4 w-4" />,
+      icon: <Monitor className="h-4 w-4" />,
     },
     {
       value: 'light',
       label: messages.theme.light,
-      icon: <SunIcon className="h-4 w-4" />,
+      icon: <Sun className="h-4 w-4" />,
     },
     {
       value: 'dark',
       label: messages.theme.dark,
-      icon: <MoonIcon className="h-4 w-4" />,
+      icon: <Moon className="h-4 w-4" />,
     },
   ];
 }
@@ -48,7 +48,7 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="flex items-center justify-center w-10 h-10 rounded-lg border border-neutral-200 dark:border-[rgba(148,163,184,0.24)] bg-background dark:bg-neutral-800">
+      <div className="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200/80 bg-background dark:border-neutral-800">
         <div className="w-4 h-4 rounded-full bg-neutral-300 animate-pulse" />
       </div>
     );
@@ -59,8 +59,6 @@ export function ThemeToggle() {
   return (
     <div className="relative">
       <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
         type="button"
         onMouseDown={(e) => e.preventDefault()}
         onClick={() => {
@@ -70,26 +68,25 @@ export function ThemeToggle() {
           setTheme(next);
         }}
         className={cn(
-          'flex items-center justify-center w-10 h-10 rounded-lg',
-          'border border-neutral-200 bg-background hover:bg-neutral-50',
-          'dark:border-[rgba(148,163,184,0.24)] dark:bg-neutral-800 dark:hover:bg-neutral-700',
-          'transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50',
-          'text-neutral-600 hover:text-primary dark:text-neutral-400 dark:hover:text-white'
+          'flex h-9 w-9 items-center justify-center rounded-md',
+          'border border-neutral-200/80 bg-background hover:bg-neutral-100',
+          'dark:border-neutral-800 dark:hover:bg-neutral-900',
+          'text-neutral-600 transition-colors duration-200 hover:text-primary dark:text-neutral-400'
         )}
         title={`${messages.theme.currentTheme}: ${currentTheme.label}. ${messages.theme.cycleTheme}.`}
       >
         <motion.div
           key={theme}
-          initial={{ rotate: -180, opacity: 0 }}
-          animate={{ rotate: 0, opacity: 1 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.18 }}
         >
           {theme === 'system' ? (
-            <ComputerDesktopIcon className="h-4 w-4" />
+            <Monitor className="h-4 w-4" />
           ) : theme === 'dark' ? (
-            <MoonIcon className="h-4 w-4" />
+            <Moon className="h-4 w-4" />
           ) : (
-            <SunIcon className="h-4 w-4" />
+            <Sun className="h-4 w-4" />
           )}
         </motion.div>
       </motion.button>
@@ -110,7 +107,7 @@ export function ThemeToggleDropdown() {
 
   if (!mounted) {
     return (
-      <div className="flex items-center justify-center w-10 h-10 rounded-lg border border-neutral-200 dark:border-[rgba(148,163,184,0.24)] bg-background dark:bg-neutral-800">
+      <div className="flex h-9 w-9 items-center justify-center rounded-md border border-neutral-200/80 bg-background dark:border-neutral-800">
         <div className="w-4 h-4 rounded-full bg-neutral-300 animate-pulse" />
       </div>
     );
@@ -121,25 +118,22 @@ export function ThemeToggleDropdown() {
   return (
     <div className="relative">
       <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
         type="button"
         onMouseDown={(e) => e.preventDefault()}
         onClick={() => setIsOpen(!isOpen)}
         className={cn(
-          'flex items-center justify-center w-10 h-10 rounded-lg',
-          'border border-neutral-200 bg-background hover:bg-neutral-50',
-          'dark:border-[rgba(148,163,184,0.24)] dark:bg-neutral-800 dark:hover:bg-neutral-700',
-          'transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/50',
-          'text-neutral-600 hover:text-primary dark:text-neutral-400 dark:hover:text-white'
+          'flex h-9 w-9 items-center justify-center rounded-md',
+          'border border-neutral-200/80 bg-background hover:bg-neutral-100',
+          'dark:border-neutral-800 dark:hover:bg-neutral-900',
+          'text-neutral-600 transition-colors duration-200 hover:text-primary dark:text-neutral-400'
         )}
         title={`${messages.theme.currentTheme}: ${currentTheme.label}`}
       >
         <motion.div
           key={theme}
-          initial={{ rotate: -180, opacity: 0 }}
-          animate={{ rotate: 0, opacity: 1 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.18 }}
         >
           {currentTheme.icon}
         </motion.div>
@@ -151,9 +145,8 @@ export function ThemeToggleDropdown() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: -10 }}
           className={cn(
-            'absolute right-0 mt-2 w-32 rounded-lg shadow-lg border',
-            'bg-background border-neutral-200 dark:border-[rgba(148,163,184,0.24)]',
-            'dark:bg-neutral-800 z-50'
+            'absolute right-0 z-50 mt-2 w-32 rounded-md border shadow-md',
+            'border-neutral-200 bg-surface dark:border-neutral-800'
           )}
         >
           <div className="py-1">
@@ -166,7 +159,7 @@ export function ThemeToggleDropdown() {
                 }}
                 className={cn(
                   'flex items-center w-full px-3 py-2 text-sm',
-                  'hover:bg-neutral-50 dark:hover:bg-neutral-700',
+                  'hover:bg-neutral-100 dark:hover:bg-neutral-900',
                   'transition-colors duration-200',
                   theme === themeOption.value
                     ? 'text-accent bg-accent/10'

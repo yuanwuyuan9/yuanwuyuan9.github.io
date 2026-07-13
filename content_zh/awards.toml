@@ -3,10 +3,34 @@ title = "奖项"
 description = "代表性荣誉与奖项。"
 
 [[items]]
+title = "全国二等奖"
+subtitle = "中国机器人及人工智能大赛"
+date = "2026"
+content = "作为指导教师，指导参赛团队获中国机器人及人工智能大赛全国二等奖。"
+
+[[items]]
+title = "全国二等奖"
+subtitle = "中国机器人及人工智能大赛"
+date = "2025"
+content = "作为指导教师，指导参赛团队获中国机器人及人工智能大赛全国二等奖。"
+
+[[items]]
+title = "区域赛二等奖"
+subtitle = "全国大学生软件创新大赛"
+date = "2025"
+content = "作为指导教师，指导参赛团队获全国大学生软件创新大赛区域赛二等奖。"
+
+[[items]]
 title = "全国亚军"
 subtitle = "机器人世界杯中国专项赛 - AI+ 赛道"
 date = "2024"
 content = "获机器人世界杯中国专项赛 AI+ 赛道全国亚军。"
+
+[[items]]
+title = "前 5%"
+subtitle = "ZTE“中兴捧月”知识工程挑战赛"
+date = "2024"
+content = "在 ZTE“中兴捧月”知识工程挑战赛中位列前 5%。"
 
 [[items]]
 title = "最佳创意项目"
