@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 import { useMessages } from '@/lib/i18n/useMessages';
 
 export interface NewsItem {
@@ -31,7 +32,16 @@ export default function News({ items, title }: NewsProps) {
                 {items.map((item, index) => (
                     <div key={index} className="grid grid-cols-[5.5rem_minmax(0,1fr)] gap-4 py-3.5 sm:grid-cols-[6.5rem_minmax(0,1fr)]">
                         <time className="pt-0.5 font-mono text-xs tabular-nums text-neutral-500 dark:text-neutral-400">{item.date}</time>
-                        <p className="text-sm leading-6 text-neutral-700 dark:text-neutral-300">{item.content}</p>
+                        <div className="text-sm leading-6 text-neutral-700 dark:text-neutral-300">
+                            <ReactMarkdown
+                                components={{
+                                    p: ({ children }) => <p>{children}</p>,
+                                    strong: ({ children }) => <strong className="font-semibold text-accent">{children}</strong>,
+                                }}
+                            >
+                                {item.content}
+                            </ReactMarkdown>
+                        </div>
                     </div>
                 ))}
             </div>
