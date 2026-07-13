@@ -6,6 +6,7 @@ description = "Education and research experience presented chronologically."
 title = "School of Optoelectronic Engineering and Instrumentation Science, Dalian University of Technology"
 subtitle = "Undergraduate Studies"
 date = "Sep 2022 - Jun 2023"
+image = "/school-logo/DUT.png"
 content = "Ranked 1st out of 93 students before transferring to the Computer Science and Technology program."
 tags = ["Undergraduate", "Rank 1/93", "Major Transfer"]
 
@@ -13,6 +14,7 @@ tags = ["Undergraduate", "Rank 1/93", "Major Transfer"]
 title = "Dalian University of Technology - State Key Laboratory of Social Computing and Cognitive Intelligence"
 subtitle = "BEng in Computer Science and Technology"
 date = "Sep 2023 - Jun 2026"
+image = "/school-logo/DUT.png"
 content = "After transferring to the Computer Science and Technology program, conducted research under the supervision of [Prof. Liang Zhang](https://faculty.dlut.edu.cn/zhangliang/zh_CN/index.htm), focusing on knowledge representation and reasoning and graph data mining."
 tags = ["Bachelor's Degree", "Knowledge Representation and Reasoning", "Graph Data Mining"]
 
@@ -20,6 +22,7 @@ tags = ["Bachelor's Degree", "Knowledge Representation and Reasoning", "Graph Da
 title = "Shanghai Artificial Intelligence Laboratory"
 subtitle = "Research Experience"
 date = "Oct 2024 - Mar 2025"
+image = "/school-logo/AILab.png"
 content = "Conducted research under the guidance of [Researcher Jiaxuan Lu](https://scholar.google.com/citations?user=Kx912p0AAAAJ&hl=en), focusing on event cameras and event-based vision."
 tags = ["Research", "Event Cameras", "Event-Based Vision"]
 
@@ -27,6 +30,7 @@ tags = ["Research", "Event Cameras", "Event-Based Vision"]
 title = "School of Intelligence Science and Technology, Nanjing University"
 subtitle = "Research Intern"
 date = "Jun 2025 - May 2026"
+image = "/school-logo/NJU.png"
 content = "Conducted human-computer interaction research under the supervision of [Prof. Ke Xu](https://lukexuke.github.io/), with additional guidance from [Researcher Xingbo Wang](https://andy-xingbowang.com/)."
 tags = ["Research Internship", "Human-Computer Interaction"]
 
@@ -34,6 +38,7 @@ tags = ["Research Internship", "Human-Computer Interaction"]
 title = "Gaoling School of Artificial Intelligence, Renmin University of China"
 subtitle = "Research Experience"
 date = "Aug 2025 - May 2026"
+image = "/school-logo/RUC.png"
 content = "Conducted research under the guidance of [Prof. Yanbiao Ma](https://scholar.google.com/citations?user=j05wwXcAAAAJ&hl=en), focusing on graph data mining."
 tags = ["Research", "Graph Data Mining"]
 
@@ -41,5 +46,6 @@ tags = ["Research", "Graph Data Mining"]
 title = "Harbin Institute of Technology, Shenzhen & Peng Cheng Laboratory"
 subtitle = "Incoming Jointly Trained PhD Student"
 date = "Starting Sep 2026"
+image = "/school-logo/HITsz.png"
 content = "Will begin the joint PhD program in September 2026 under the supervision of [Prof. Jing Li](https://www.li-jing.com/) and [Prof. Fangming Liu](https://fangmingliu.github.io/)."
 tags = ["PhD", "Joint Training"]

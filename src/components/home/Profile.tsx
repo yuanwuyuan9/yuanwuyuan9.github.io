@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Github, GraduationCap, Heart, Linkedin, Mail, MapPin } from 'lucide-react';
+import VisitorMap from '@/components/home/VisitorMap';
 import type { SiteConfig } from '@/lib/config';
 import { useMessages } from '@/lib/i18n/useMessages';
 
@@ -148,6 +149,8 @@ export default function Profile({ author, social, features, researchInterests }:
           </ul>
         </div>
       )}
+
+      <VisitorMap title={messages.profile.visitors} />
 
       {features.enable_likes && (
         <div className="relative mt-6 flex justify-center lg:justify-start">

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { CardPageConfig } from '@/types/page';
 import MarkdownContent from '@/components/ui/MarkdownContent';
 
@@ -42,23 +43,36 @@ export default function CardPage({ config, embedded = false }: { config: CardPag
               <span className="absolute -bottom-8 -top-8 left-1/2 w-px -translate-x-1/2 bg-neutral-200 dark:bg-neutral-800" />
               <span className="relative mt-1.5 h-2.5 w-2.5 rounded-full border-2 border-background bg-accent ring-1 ring-accent/25" />
             </div>
-            <div className="min-w-0">
-              <h2 className={`${embedded ? 'text-lg' : 'text-xl sm:text-[22px]'} font-serif font-semibold leading-snug text-primary`}>
-                {item.title}
-              </h2>
-              {item.subtitle && (
-                <p className="mt-1.5 text-sm font-semibold leading-6 text-accent">{item.subtitle}</p>
-              )}
-              {item.content && (
-                <MarkdownContent content={item.content} compact className="mt-3" />
-              )}
-              {item.tags && item.tags.length > 0 && (
-                <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-neutral-500 dark:text-neutral-400">
-                  {item.tags.map((tag) => (
-                    <span key={tag} className="before:mr-1.5 before:text-neutral-300 before:content-['/'] dark:before:text-neutral-700 first:before:hidden">
-                      {tag}
-                    </span>
-                  ))}
+            <div className={`min-w-0 ${item.image ? 'grid grid-cols-[minmax(0,1fr)_5.25rem] items-start gap-4 sm:grid-cols-[minmax(0,1fr)_6.5rem] sm:gap-6' : ''}`}>
+              <div className="min-w-0">
+                <h2 className={`${embedded ? 'text-lg' : 'text-xl sm:text-[22px]'} font-serif font-semibold leading-snug text-primary`}>
+                  {item.title}
+                </h2>
+                {item.subtitle && (
+                  <p className="mt-1.5 text-sm font-semibold leading-6 text-accent">{item.subtitle}</p>
+                )}
+                {item.content && (
+                  <MarkdownContent content={item.content} compact className="mt-3" />
+                )}
+                {item.tags && item.tags.length > 0 && (
+                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-neutral-500 dark:text-neutral-400">
+                    {item.tags.map((tag) => (
+                      <span key={tag} className="before:mr-1.5 before:text-neutral-300 before:content-['/'] dark:before:text-neutral-700 first:before:hidden">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {item.image && (
+                <div className="relative aspect-[6/5] w-full self-start opacity-90 transition-opacity duration-200 hover:opacity-100">
+                  <Image
+                    src={item.image}
+                    alt={`${item.title} logo`}
+                    fill
+                    className={`object-contain p-0.5 ${item.image.includes('AILab') ? 'mix-blend-multiply dark:mix-blend-screen dark:grayscale dark:invert' : ''}`}
+                    sizes="(max-width: 640px) 84px, 104px"
+                  />
                 </div>
               )}
             </div>

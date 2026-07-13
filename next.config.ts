@@ -5,6 +5,13 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'mapmyvisitors.com',
+        pathname: '/map.png',
+      },
+    ],
   },
   /* config options here */
   webpack: (config) => {

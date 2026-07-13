@@ -6,6 +6,7 @@ description = "按时间顺序展示教育背景与科研经历。"
 title = "大连理工大学 · 光电工程与仪器科学学院"
 subtitle = "本科阶段"
 date = "2022 年 9 月 - 2023 年 6 月"
+image = "/school-logo/DUT.png"
 content = "专业排名 1/93，随后转入计算机科学与技术专业学习。"
 tags = ["本科", "专业排名 1/93", "转专业"]
 
@@ -13,6 +14,7 @@ tags = ["本科", "专业排名 1/93", "转专业"]
 title = "大连理工大学 · 社会计算与认知智能国家重点实验室"
 subtitle = "计算机科学与技术专业工学学士"
 date = "2023 年 9 月 - 2026 年 6 月"
+image = "/school-logo/DUT.png"
 content = "转入计算机科学与技术专业后，在 [张亮教授](https://faculty.dlut.edu.cn/zhangliang/zh_CN/index.htm) 的指导下开展研究，研究方向为知识表示与推理、图数据挖掘。"
 tags = ["本科", "知识表示与推理", "图数据挖掘"]
 
@@ -20,6 +22,7 @@ tags = ["本科", "知识表示与推理", "图数据挖掘"]
 title = "上海人工智能实验室"
 subtitle = "科研经历"
 date = "2024 年 10 月 - 2025 年 3 月"
+image = "/school-logo/AILab.png"
 content = "在 [卢嘉轩研究员](https://scholar.google.com/citations?user=Kx912p0AAAAJ&hl=en) 的指导下开展研究，研究方向为事件相机与事件视觉。"
 tags = ["科研", "事件相机", "事件视觉"]
 
@@ -27,6 +30,7 @@ tags = ["科研", "事件相机", "事件视觉"]
 title = "南京大学智能科学与技术学院"
 subtitle = "科研实习生"
 date = "2025 年 6 月 - 2026 年 5 月"
+image = "/school-logo/NJU.png"
 content = "在 [徐科教授](https://lukexuke.github.io/) 的指导下开展人机交互研究，并获 [王星博研究员](https://andy-xingbowang.com/) 协助指导。"
 tags = ["科研实习", "人机交互"]
 
@@ -34,6 +38,7 @@ tags = ["科研实习", "人机交互"]
 title = "中国人民大学高瓴人工智能学院"
 subtitle = "科研经历"
 date = "2025 年 8 月 - 2026 年 5 月"
+image = "/school-logo/RUC.png"
 content = "在 [马彦彪教授](https://scholar.google.com/citations?user=j05wwXcAAAAJ&hl=en) 的指导下开展研究，研究方向为图数据挖掘。"
 tags = ["科研", "图数据挖掘"]
 
@@ -41,5 +46,6 @@ tags = ["科研", "图数据挖掘"]
 title = "哈尔滨工业大学（深圳）与鹏城实验室"
 subtitle = "准联合培养博士生"
 date = "2026 年 9 月起"
+image = "/school-logo/HITsz.png"
 content = "将于 2026 年 9 月入学，导师为 [李晶教授](https://www.li-jing.com/) 和 [刘方明教授](https://fangmingliu.github.io/)。"
 tags = ["博士研究生", "联合培养"]

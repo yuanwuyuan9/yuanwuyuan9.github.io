@@ -190,6 +190,10 @@ a {
   background: var(--surface);
 }
 
+.dark .visitor-map-image {
+  filter: invert(0.92) hue-rotate(180deg) saturate(0.9);
+}
+
 ::-webkit-scrollbar {
   width: 9px;
 }
