@@ -1,12 +1,12 @@
 [site]
 title = "Siyuan Li"
-description = "Siyuan Li's academic homepage. Incoming jointly trained PhD student at Harbin Institute of Technology, Shenzhen, and Peng Cheng Laboratory."
+description = "Siyuan Li's academic homepage. Jointly trained PhD student at Harbin Institute of Technology, Shenzhen, and Peng Cheng Laboratory."
 favicon = "/favicon.ico"
-last_updated = "July 13, 2026"
+last_updated = "August 27, 2026"
 
 [author]
 name = "Siyuan Li"
-title = "Incoming PhD Student"
+title = "PhD Student"
 institution = "Harbin Institute of Technology, Shenzhen & Peng Cheng Laboratory"
 avatar = "/bio.jpg"
 

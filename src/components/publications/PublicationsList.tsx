@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Image from 'next/image';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   BookOpen,
@@ -187,19 +186,7 @@ export default function PublicationsList({ config, publications, embedded = fals
               transition={{ duration: 0.25, delay: index * 0.035 }}
               className="border-b border-neutral-200 py-7 sm:py-8 dark:border-neutral-800"
             >
-              <div className={cn('grid gap-5', publication.preview && 'md:grid-cols-[13.5rem_minmax(0,1fr)] md:gap-7')}>
-                {publication.preview && (
-                  <div className="relative aspect-video overflow-hidden rounded-md border border-neutral-200 bg-white dark:border-neutral-800">
-                    <Image
-                      src={`/papers/${publication.preview}`}
-                      alt={publication.title}
-                      fill
-                      className="object-contain p-3"
-                      sizes="(max-width: 768px) 100vw, 216px"
-                    />
-                  </div>
-                )}
-
+              <div className="grid">
                 <div className="min-w-0">
                   <h2 className={`${embedded ? 'text-lg' : 'text-xl sm:text-[22px]'} font-serif font-semibold leading-snug text-primary`}>
                     <FormattedBibTeXText nodes={publication.titleNodes} fallback={publication.title} />
@@ -224,6 +211,16 @@ export default function PublicationsList({ config, publications, embedded = fals
                   )}
 
                   <div className="mt-4 flex flex-wrap gap-2">
+                    {publication.placeholder && (
+                      <>
+                        <button type="button" disabled className={cn(actionClass, 'cursor-not-allowed opacity-45')}>
+                          <Download className="h-3.5 w-3.5" /> {messages.publications.pdf}
+                        </button>
+                        <button type="button" disabled className={cn(actionClass, 'cursor-not-allowed opacity-45')}>
+                          <BookOpen className="h-3.5 w-3.5" /> {messages.publications.bibtex}
+                        </button>
+                      </>
+                    )}
                     {publication.pdfUrl && (
                       <a href={publication.pdfUrl} target="_blank" rel="noopener noreferrer" className={actionClass}>
                         <Download className="h-3.5 w-3.5" /> {messages.publications.pdf}
@@ -258,7 +255,7 @@ export default function PublicationsList({ config, publications, embedded = fals
                         <FileText className="h-3.5 w-3.5" /> {messages.publications.abstract}
                       </button>
                     )}
-                    {publication.bibtex && (
+                    {!publication.placeholder && publication.bibtex && (
                       <button
                         type="button"
                         onClick={() => setExpandedBibtexId(expandedBibtexId === publication.id ? null : publication.id)}
