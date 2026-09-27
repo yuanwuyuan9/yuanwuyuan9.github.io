@@ -61,7 +61,7 @@ export default function SelectedPublications({ publications, title, enableOnePag
                             ))}
                         </p>
                         <p className="text-sm font-semibold text-accent">
-                            {pub.journal || pub.conference}
+                            {pub.journal || pub.conference || (pub.status === 'under-review' ? messages.publications.underReview : '')}
                         </p>
                         {pub.description && (
                             <p className="mt-2 line-clamp-2 text-sm leading-6 text-neutral-500 dark:text-neutral-400">

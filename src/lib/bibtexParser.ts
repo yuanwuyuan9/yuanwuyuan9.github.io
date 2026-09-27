@@ -1,4 +1,4 @@
-import { Publication, PublicationType, ResearchArea } from '@/types/publication';
+import { Publication, PublicationStatus, PublicationType, ResearchArea } from '@/types/publication';
 import { getConfig } from './config';
 import { getRuntimeI18nConfig } from './i18n/config';
 import { parseBibTeXInline } from './bibtexInline';
@@ -18,6 +18,15 @@ const typeMapping: Record<string, PublicationType> = {
   techreport: 'technical-report',
   unpublished: 'preprint',
   misc: 'preprint',
+};
+
+const statusMapping: Record<string, PublicationStatus> = {
+  published: 'published',
+  accepted: 'accepted',
+  'under-review': 'under-review',
+  submitted: 'submitted',
+  'in-preparation': 'in-preparation',
+  draft: 'draft',
 };
 
 // Convert month names to numbers
@@ -60,6 +69,8 @@ export function parseBibTeX(bibtexContent: string, locale?: string): Publication
     // Parse selected field (convert string to boolean)
     const selected = tags.selected === 'true' || tags.selected === 'yes';
     const placeholder = tags.placeholder === 'true' || tags.placeholder === 'yes';
+    const statusKey = tags.status?.toLowerCase().trim().replace(/\s+/g, '-');
+    const status = statusMapping[statusKey] || 'published';
 
     // Parse preview field (remove braces if present)
     const preview = tags.preview?.replace(/[{}]/g, '');
@@ -74,7 +85,7 @@ export function parseBibTeX(bibtexContent: string, locale?: string): Publication
       year,
       month: monthMapping[tags.month?.toLowerCase()] ? String(month) : tags.month,
       type,
-      status: 'published',
+      status,
       tags: keywords,
       keywords,
       researchArea: detectResearchArea(tags.title, keywords),
@@ -97,7 +108,7 @@ export function parseBibTeX(bibtexContent: string, locale?: string): Publication
       preview,
 
       // Store original BibTeX (excluding custom fields)
-      bibtex: reconstructBibTeX(entry, ['selected', 'placeholder', 'preview', 'description', 'keywords', 'code', 'pdf', 'pdfurl', 'arxiv']),
+      bibtex: reconstructBibTeX(entry, ['selected', 'status', 'placeholder', 'preview', 'description', 'keywords', 'code', 'pdf', 'pdfurl', 'arxiv']),
     };
 
     // Clean up undefined fields

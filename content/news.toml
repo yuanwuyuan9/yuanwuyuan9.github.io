@@ -1,10 +1,22 @@
 [[news]]
+date = "2026-09"
+content = "I mentored a second-year undergraduate intern on open-world KG-Agent exploratory question answering. Our paper was submitted to **AAAI 2027** and successfully advanced to Phase 2."
+
+[[news]]
+date = "2026-09"
+content = "Our paper on agent memory management was accepted to **NeurIPS 2026**. I am grateful to all collaborators and advisors."
+
+[[news]]
 date = "2026-08"
 content = "Our paper on personalized alignment for large language models was accepted to **EMNLP 2026 Findings**. I am grateful to my labmates and advisors."
 
 [[news]]
 date = "2026-07"
 content = "Our collaborative work on human-computer interaction, to which I contributed as a core team member, was accepted by **Visual Informatics**."
+
+[[news]]
+date = "2026-05"
+content = "I led and first-authored two papers submitted to **TPAMI**; one received a major revision decision, while the other remains under review."
 
 [[news]]
 date = "2026-05"

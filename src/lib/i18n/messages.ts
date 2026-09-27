@@ -44,6 +44,8 @@ export interface LocaleMessages {
     code: string;
     pdf: string;
     arxiv: string;
+    paper: string;
+    underReview: string;
   };
   footer: {
     lastUpdated: string;
@@ -96,6 +98,8 @@ const en: LocaleMessages = {
     code: 'Code',
     pdf: 'PDF',
     arxiv: 'arXiv',
+    paper: 'Paper',
+    underReview: 'Under Review',
   },
   footer: {
     lastUpdated: 'Last updated',
@@ -148,6 +152,8 @@ const zh: LocaleMessages = {
     code: '代码',
     pdf: 'PDF',
     arxiv: 'arXiv',
+    paper: '论文页面',
+    underReview: 'Under Review',
   },
   footer: {
     lastUpdated: '最近更新',

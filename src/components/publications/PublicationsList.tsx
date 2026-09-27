@@ -203,7 +203,8 @@ export default function PublicationsList({ config, publications, embedded = fals
                     ))}
                   </p>
                   <p className="mt-2 text-sm font-semibold text-accent">
-                    {publication.journal || publication.conference} <span className="font-normal text-neutral-500 dark:text-neutral-400">{publication.year}</span>
+                    {publication.journal || publication.conference || (publication.status === 'under-review' ? messages.publications.underReview : '')}{' '}
+                    <span className="font-normal text-neutral-500 dark:text-neutral-400">{publication.year}</span>
                   </p>
 
                   {publication.description && (
@@ -224,6 +225,11 @@ export default function PublicationsList({ config, publications, embedded = fals
                     {publication.pdfUrl && (
                       <a href={publication.pdfUrl} target="_blank" rel="noopener noreferrer" className={actionClass}>
                         <Download className="h-3.5 w-3.5" /> {messages.publications.pdf}
+                      </a>
+                    )}
+                    {publication.url && !publication.arxivId && !publication.doi && (
+                      <a href={publication.url} target="_blank" rel="noopener noreferrer" className={actionClass}>
+                        <ExternalLink className="h-3.5 w-3.5" /> {messages.publications.paper}
                       </a>
                     )}
                     {publication.arxivId && (
